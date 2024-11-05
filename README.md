@@ -51,7 +51,7 @@ Get a shell in any of the containers
 docker exec -it <container name> bash -l
 ```
 
-Once in the database container, you can get a MySQL CLI in the usual way
+Once in the database container, you can get a MySQL CLI in the usual way.
 
 ```bash
 mysql -uroot -p<password> 
