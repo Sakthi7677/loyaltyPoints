@@ -25,6 +25,7 @@ app.get('/points', (req, res) => {
              if (user.name===res.req.query.username && user.isRetail==="NO"){
                 return res.render('card', { points:user.points,cusName:user.name});
              }
+        
              else if(user.name===res.req.query.username && user.isRetail==="YES"){
                 return res.render('userList',{users:results});
              }
