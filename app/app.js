@@ -17,27 +17,49 @@ app.get("/", function(req, res) {
 });
 
 
-app.get('/points', (req, res) => {
-    sql = 'select * from loyaltypoints';
-    db.query(sql).then(results => {
-        console.log(results)
-            results.filter((user)=>{
-             if (user.name===res.req.query.username && user.isRetail==="NO"){
-                return res.render('card', { points:user.points,cusName:user.name});
-             }
-        
-             else if(user.name===res.req.query.username && user.isRetail==="YES"){
-                return res.render('userList',{users:results});
-             }
+// app.get('/points/:username', (req, res) => {
+//     var user = req.params.id;
+//     sql = 'select * from loyaltypoints where username = ?';
+//     db.query(sql).then(results => {
+//         console.log(results)
+//             results.filter((user)=>{
+//              if (user.name===res.req.query.username && user.isRetail==="NO"){
+//                 return res.render('card', { points:user.points,cusName:user.name});
+//              }
+//              else if(user.name===res.req.query.username && user.isRetail==="YES"){
+//                 return res.render('userList',{users:results});
+//              }
              
-        })
+//         })
 
        
-    });
+//     });
         
-  });
+//   });
+app.get('/points/retailer', function (req, res) {
+    
+    var sql = 'select * from loyaltypoints ';
+    db.query(sql).then(results => {
+        console.log(results)
+        return res.render('userList',{users:results}); 
+    })
+       
+    
+});
 
-
+app.get('/points/:userid', function (req, res) {
+    var userid = req.params.userid;
+    console.log(userid)
+    var sql = 'select * from loyaltypoints where id = ?';
+    db.query(sql, [userid]).then(results => {
+        var row = results[0];
+        console.log(row.isRetail)
+        if(row.isRetail==="NO"){
+            return res.render('card', { points:row.points,cusName:row.name});
+        }
+            });
+    
+});
 
 
 // Start server on port 3000

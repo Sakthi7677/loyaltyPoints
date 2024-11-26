@@ -78,7 +78,7 @@ html
   body
    .form-container
       h1 Loyalty Points
-      form(action='/points')
+      form(action='/points/:username')
         div
           label(for='username') Username:
           input(type='text', id='username', name='username', required)
