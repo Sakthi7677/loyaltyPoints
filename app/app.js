@@ -16,7 +16,9 @@ app.get("/", function(req, res) {
    res.render("index");
 });
 
-
+app.get("/aboutUs", function(req, res) {
+    res.render("aboutUs");
+ });
 // app.get('/points/:username', (req, res) => {
 //     var user = req.params.id;
 //     sql = 'select * from loyaltypoints where username = ?';
