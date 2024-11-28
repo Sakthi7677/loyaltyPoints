@@ -38,7 +38,7 @@ app.get("/", function(req, res) {
 //   });
 app.get('/points/retailer', function (req, res) {
     
-    var sql = 'select * from loyaltypoints ';
+    var sql = "select * from loyaltypoints where role = 'customer'";
     db.query(sql).then(results => {
         console.log(results)
         return res.render('userList',{users:results}); 
@@ -53,8 +53,8 @@ app.get('/points/:userid', function (req, res) {
     var sql = 'select * from loyaltypoints where id = ?';
     db.query(sql, [userid]).then(results => {
         var row = results[0];
-        console.log(row.isRetail)
-        if(row.isRetail==="NO"){
+        console.log(row)
+        if(row.role==="customer"){
             return res.render('card', { points:row.points,cusName:row.name});
         }
             });
