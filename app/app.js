@@ -56,7 +56,7 @@ app.get('/points/:userid', function (req, res) {
     db.query(sql, [userid]).then(results => {
         var row = results[0];
         console.log(row)
-        if(row.role==="customer"){
+        if(row?.role==="customer"){
             return res.render('card', { points:row.points,cusName:row.name});
         }
             });
