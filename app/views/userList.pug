@@ -6,7 +6,7 @@ html
       /* Custom CSS for styling */
       body {
         font-family: 'Arial', sans-serif;
-        background-image: url('https://images.app.goo.gl/57N14xCeycYq7NkK6'); 
+        background-image: url('https://media.istockphoto.com/id/1438530555/photo/empty-charcuterie-small-business-concepts.jpg?s=1024x1024&w=is&k=20&c=lX3t64iBj40us2MRy1pif6PaJL4FaU30R4rOR4Q78_4='); 
         background-size: cover; 
         background-position: center center; 
         background-attachment: fixed; 
@@ -17,28 +17,31 @@ html
         padding: 20px;
       }
       .text-center {
-        color: #ff0062;
+        color: #f00909;
         margin-bottom: 20px;
-        margin-left: 22rem;
+        margin-left: 28rem;
         font-size: 5rem;
+        font-weight :bold
       }
       .list-group-item {
-        font-size: 1.5rem;
-        color: #495057;
+        font-size: 3rem;
+        color: #82878d00;
         padding: 20px;
         margin: 5px 0;
         border-radius: 4px;
         transition: background-color 0.3s;
+        font-weight :bold;
+        
       }
       .list-group {
         margin-left: 29rem;
         margin-top: 5rem;
       }
-      .list-group-item:hover {
-        background-color: #f1f1f1;
-      }
+      //- .list-group-item:hover {
+      //-   background-color: #d1d6ddb3;
+      //- }
       .btn {
-        background-color: #28a745;
+        background-color: #121312;
         color: #fff;
         text-align: center;
         padding: 8px 16px;
@@ -52,4 +55,4 @@ html
       ul.list-group
         each user in users
           li.list-group-item
-            a.btn(href="#", name=user.name) #{user.name}
+            a.btn(href="/aboutUs", name=user.name) #{user.name}
