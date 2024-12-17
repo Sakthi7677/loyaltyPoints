@@ -55,4 +55,4 @@ html
       ul.list-group
         each user in users
           li.list-group-item
-            a.btn(href="/aboutUs", name=user.name) #{user.name}
+            a.btn(href="/retailer-view/"+ `${user.id}`, name=user.name) #{user.name}
