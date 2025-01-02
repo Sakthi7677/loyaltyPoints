@@ -26,13 +26,7 @@ app.use(session({
 // });
 
 app.get("/", function(req, res) {
-    console.log(req.session);
-    if (req.session.uid) {
-		res.send('Welcome back, ' + req.session.uid + '!');
-	} else {
-		res.send('Please login to view this page!');
-	}
-	res.end();
+    res.redirect('/login')
 });
 
 // Register
@@ -140,25 +134,30 @@ app.post('/modify-points/:userid', function (req, res) {
 });
 
 app.post('/set-password', async function (req, res) {
-    params = req.body;
+    const params = req.body;
     var user = new User(params.email);
+
     try {
-        uId = await user.getIdFromEmail();
+        const uId = await user.getIdFromEmail();
+        
         if (uId) {
-            // If a valid, existing user is found, set the password and redirect to the users single-student page
+            // If a valid, existing user is found, set the password and render confirmation page
             await user.setUserPassword(params.password);
             console.log(req.session.id);
-            res.send('Password set successfully');
-        }
-        else {
+            const message = 'Password set successfully!';
+            res.render('confirmation', { message: message });  // Render confirmation page with message
+        } else {
             // If no existing user is found, add a new one
-            newId = await user.addUser(params.name, params.email, params.password);
-            res.send('Perhaps a page where a new user sets a programme would be good here');
+            const newId = await user.addUser(params.name, params.email, params.password);
+            const message = 'New user added successfully!';
+            res.render('confirmation', { message: message });  // Render confirmation page with message
         }
     } catch (err) {
-        console.error(`Error while adding password `, err.message);
+        console.error(`Error while adding password`, err.message);
+        res.render('confirmation', { message: 'An error occurred. Please try again.' });  // Render error message
     }
 });
+
 
 app.post('/authenticate', async function (req, res) {
     
@@ -224,7 +223,7 @@ app.post('/delete-user/:userid', async function (req, res) {
 
 
 // Logout
-app.get('/logout', function (req, res) {
+app.post('/logout', function (req, res) {
     req.session.destroy();
     res.redirect('/login');
   });
