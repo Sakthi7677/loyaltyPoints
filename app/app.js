@@ -198,6 +198,31 @@ app.post('/authenticate', async function (req, res) {
     }
 });
 
+app.post('/delete-user/:userid', async function (req, res) {
+    var userId = req.params.userid;
+    console.log('Deleting user with ID:', userId);
+
+    try {
+        // Delete the user from the loyaltypoints table
+        var sql = 'DELETE FROM loyaltypoints WHERE id = ?';
+        const result = await db.query(sql, [userId]);
+        
+        if (result.affectedRows > 0) {
+            // Success: User deleted
+            console.log('User successfully deleted');
+            res.redirect('/points/retailer'); // Redirect to a confirmation page or message
+        } else {
+            // Failure: No user found with the given ID
+            console.log('User deletion failed');
+            res.redirect('/points/retailer'); // Redirect to an error page
+        }
+    } catch (err) {
+        console.error(`Error while deleting user: ${err.message}`);
+        res.redirect('/points/retailer'); // Handle error appropriately
+    }
+});
+
+
 // Logout
 app.get('/logout', function (req, res) {
     req.session.destroy();
