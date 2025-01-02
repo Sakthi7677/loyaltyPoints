@@ -1,5 +1,6 @@
 // Import express.js
 const express = require("express");
+const { User } = require("./models/user");
 
 // Create express app
 var app = express();
@@ -11,10 +12,37 @@ app.set('view engine', 'pug');
 app.set('views', './app/views');
 // Get the functions in the db.js file to use
 const db = require('./services/db');
+var session = require('express-session');
+app.use(session({
+  secret: 'secretkeysdfjsflyoifasd',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 // Create a route for root - /
+// app.get("/", function(req, res) {
+//    res.render("index");
+// });
+
 app.get("/", function(req, res) {
-   res.render("index");
+    console.log(req.session);
+    if (req.session.uid) {
+		res.send('Welcome back, ' + req.session.uid + '!');
+	} else {
+		res.send('Please login to view this page!');
+	}
+	res.end();
+});
+
+// Register
+app.get('/register', function (req, res) {
+    res.render('register');
+});
+
+// Login
+app.get('/login', function (req, res) {
+    res.render('index');
 });
 
 app.get("/aboutUs", function(req, res) {
@@ -111,7 +139,70 @@ app.post('/modify-points/:userid', function (req, res) {
     });
 });
 
+app.post('/set-password', async function (req, res) {
+    params = req.body;
+    var user = new User(params.email);
+    try {
+        uId = await user.getIdFromEmail();
+        if (uId) {
+            // If a valid, existing user is found, set the password and redirect to the users single-student page
+            await user.setUserPassword(params.password);
+            console.log(req.session.id);
+            res.send('Password set successfully');
+        }
+        else {
+            // If no existing user is found, add a new one
+            newId = await user.addUser(params.name, params.email, params.password);
+            res.send('Perhaps a page where a new user sets a programme would be good here');
+        }
+    } catch (err) {
+        console.error(`Error while adding password `, err.message);
+    }
+});
 
+app.post('/authenticate', async function (req, res) {
+    
+    params = req.body;
+    var user = new User(params.email);
+    try {
+        uId = await user.getIdFromEmail();
+        if (uId) {
+            match = await user.authenticate(params.password);
+            if (match) {
+                req.session.uid = uId;
+                req.session.loggedIn = true;
+                console.log(req.session.id);
+                var sql = "SELECT role FROM loyaltypoints WHERE id = ?";
+                const result = await db.query(sql, [uId]); 
+                console.log('&&&')
+                console.log(result)
+                if (result[0].role === 'customer') {
+                    res.redirect('/points/' + uId);
+                }
+                if (result[0].role === 'retailer') {
+                    res.redirect('/points/retailer');
+                }
+                
+                // res.redirect('/single-student/' + uId);
+            }
+            else {
+                // TODO improve the user journey here
+                res.send('invalid password');
+            }
+        }
+        else {
+            res.send('invalid email');
+        }
+    } catch (err) {
+        console.error(`Error while comparing `, err.message);
+    }
+});
+
+// Logout
+app.get('/logout', function (req, res) {
+    req.session.destroy();
+    res.redirect('/login');
+  });
 
 // Start server on port 3000
 app.listen(3000,function(){
