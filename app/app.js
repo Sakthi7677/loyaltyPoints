@@ -86,8 +86,6 @@ app.post('/modify-points/:userid', function (req, res) {
     console.log(userid);
     
     var points = req.body['new_points']; // Get form data
-    console.log('___+++', req.body)
-    console.log(points);
     // Fetch user data from the database
     var sql = 'UPDATE loyaltypoints SET points = ? WHERE id = ?';
     db.query(sql, [points, userid]).then(results => {
@@ -102,7 +100,8 @@ app.post('/modify-points/:userid', function (req, res) {
             res.render('submission', {
                 errorMessage: 'No points were updated. Please try again.',
                 userid: userid,
-                points: points
+                points: points,
+                cusName:req.query.cusName
             });
         }
     }).catch(err => {
