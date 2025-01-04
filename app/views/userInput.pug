@@ -1,45 +1,122 @@
 doctype html
 html
   head
-    title user input
+    title User Input
     style.
       /* Custom CSS for styling */
       body {
         font-family: 'Arial', sans-serif;
-        background-image: url('https://images.app.goo.gl/57N14xCeycYq7NkK6'); 
-        background-size: cover; 
-        background-position: center center; 
-        background-attachment: fixed; 
-        color: #fff; 
-      }
-      .container {
-        border-radius: 8px;
-        padding: 20px;
-      }
-      .text-center {
-        color: #ff0062;
-        margin-bottom: 20px;
-        margin-left: 25rem;
-        font-size: 5rem;
-      }
-      .points{
-        background-color: #28a745;
+        background-image: url('https://media.istockphoto.com/id/1438530555/photo/empty-charcuterie-small-business-concepts.jpg?s=1024x1024&w=is&k=20&c=lX3t64iBj40us2MRy1pif6PaJL4FaU30R4rOR4Q78_4='); /* Example URL */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
         color: #fff;
-        text-align: center;
-        padding: 40px 16px;
-        border-radius: 60px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size:2rem
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
       }
+
+      .container {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        max-width: 600px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      h1.text-center {
+        color: #fdfdfd;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      p.points {
+        background-color: #ab7651;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        margin: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      select {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: #28a745;
+        box-shadow: 0 0 4px rgba(40, 167, 69, 0.8);
+      }
+
+      input[type="submit"] {
+        background-color: #ab7651;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      input[type="submit"]:hover {
+        background-color: #ab7651;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        h1.text-center {
+          font-size: 1.8rem;
+        }
+
+        p.points {
+          font-size: 1.2rem;
+          padding: 15px;
+        }
+
+        select {
+          font-size: 0.9rem;
+        }
+
+        input[type="submit"] {
+          font-size: 1rem;
+        }
+      }
+
   body
     .container.mt-4
-      h1.text-center Customer Id: #{userid}, Customer Name: #{cusName}
-      p.points The customer is having #{points} points
-      p.points Update Loyalty-points for this customer
-      form(action='/modify-points/'+ userid+`?${cusName=cusName}`, method='POST')
-        input(type='hidden' name='new-points' value='#{points}')
-        textarea(name='new_points' rows=6 cols=50)
+      h1.text-center CUSTOMER ID: #{userid}
+      p.points  #{cusName} is having #{points} points
+      form(action='/modify-points/' + userid + `?cusName=${cusName}`, method='POST')
+        input(type='hidden' name='current-points' value='#{points}')
+        select(name='new_points')
+          option(value='') -- Select Points Adjustment --
+          option(value=(points - 20)) #{points - 20} Points
+          option(value=(points + 20)) #{points + 20} Points
+          option(value=(points)) No Change (#{points} Points)
+
         div 
           input(type='submit' value='Submit')
 
