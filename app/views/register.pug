@@ -1,0 +1,89 @@
+doctype html
+html
+  head
+    title Registration Page
+    style.
+      body {
+          font-family: Arial, sans-serif;
+          background-image: url('https://media.istockphoto.com/id/1438530555/photo/empty-charcuterie-small-business-concepts.jpg?s=1024x1024&w=is&k=20&c=lX3t64iBj40us2MRy1pif6PaJL4FaU30R4rOR4Q78_4='); 
+          background-size: cover;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+      }
+      .form-container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+        font-weight: bold;
+        margin-right:3rem
+      }
+      h1 {
+          font-size: 35px;
+          color: #1f1d1c;
+          text-align: center;
+          margin-bottom: 40px;
+           font-weight: bold;
+      }
+      label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+          color: #555555;
+          font-size:16px
+      }
+      input[type="text"], input[type="email"], input[type="password"] {
+          width: calc(100% - 20px);
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #cccccc;
+          border-radius: 4px;
+          font-size: 14px;
+      }
+      input[type="submit"] {
+          width: 100%;
+          padding: 10px;
+          background-color: #1f1d1c;
+          border: none;
+          color: white;
+          font-size: 20px;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      input[type="submit"]:hover {
+          background-color: #1f1d1c;
+      }
+      .form-container a {
+          display: block;
+          text-align: center;
+          margin-top: 20px;
+          font-size: 16px;
+          color: #1f1d1c;
+          text-decoration: none;
+      }
+      .form-container a:hover {
+          text-decoration: underline;
+      }
+  body
+    .form-container
+      h1 Register here
+      form(action='/set-password' method='POST')
+        label(for='name') Enter your Fullname:
+        input(name='name' type='text' )
+
+        label(for='email') Enter your email:
+        input(name='email' type='email' )
+
+        label(for='password') Enter your password:
+        input(name='password' type='password' )
+
+        input(type='submit' value='Submit')
+
+      a(href='/login') Already have an account? Login here

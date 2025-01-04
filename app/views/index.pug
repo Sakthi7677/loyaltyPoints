@@ -25,18 +25,19 @@ html
         max-width: 400px;
         text-align: center;
         box-sizing: border-box;
+        margin-right:5rem
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 35px;
         color: #1f1d1c;
-        margin-bottom: 20px;
+        margin-bottom: 35px;
         font-weight: bold;
       }
 
       label {
         display: block;
-        font-size: 14px;
+        font-size: 16px;
         color: #1f1d1c;
         margin-bottom: 5px;
         text-align: left;
@@ -67,7 +68,7 @@ html
         padding: 12px 20px;
         border: none;
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 20px;
         cursor: pointer;
         width: 100%;
         transition: background-color 0.3s ease;
@@ -76,6 +77,34 @@ html
 
       button[type="submit"]:hover {
         background-color: #1f1d1c;
+      }
+
+      /* Sign Up Link */
+      .signup-link {
+        display: block;
+        margin-top: 20px;
+        color: #1f1d1c;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .signup-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Position the About Us link at the bottom right */
+      .about-us-link {
+        display: block;
+        margin-top: 20px;
+        color: #1f1d1c;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .about-us-link:hover {
+        text-decoration: underline;
       }
 
       /* Responsive design */
@@ -112,3 +141,9 @@ html
 
         div
           button(type='submit') Login
+
+      a.signup-link(href='/register') Create an Account
+      a.about-us-link(href='/aboutUs') About Us
+
+    
+    
