@@ -18,7 +18,6 @@ html
         align-items: center;
         flex-direction: column;
         text-align: center;
-        padding: 20px;
       }
       .container {
         border-radius: 12px;
@@ -49,24 +48,43 @@ html
       }
       
       .offers {
-        background-color:#b6ac82b8; /* Slightly transparent white */
+        background-color: #b6ac82b8; /* Slightly transparent white */
         padding: 20px;
         border-radius: 10px;
         margin-top: 30px;
         font-weight: bold;
-        font-size :2.5rem
+        font-size: 2.5rem;
       }
       .offers h2 {
         color: #fff;
         margin-bottom: 15px;
         font-weight: bold;
-        font-size :1.5rem
+        font-size: 1.5rem;
       }
       .offers p {
         font-size: 1.2rem;
         color: #040505;
         font-weight: bold;
-        font-size :1.5rem
+        font-size: 1.5rem;
+      }
+
+      /* Logout button styling */
+      .logout-btn {
+        position: fixed; /* Fixed to the top right */
+        top: 20px;
+        right: 20px;
+        background-color: #dc3545; /* Red background */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+      }
+
+      .logout-btn:hover {
+        background-color: #c82333; /* Darker red on hover */
       }
   body
     .container
@@ -78,3 +96,7 @@ html
       p 2. Exclusive discounts on select items – up to 30% off!
       p 3. Refer a friend and get 100 bonus points for each successful referral.
       p 4. Sign up for our newsletter and receive a 10% off coupon for your next order.
+
+    //- Logout button form
+    form(action='/logout', method='POST')
+      button(type='submit', class='logout-btn') Logout

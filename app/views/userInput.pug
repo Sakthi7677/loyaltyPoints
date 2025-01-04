@@ -22,7 +22,7 @@ html
         margin-left: 25rem;
         font-size: 5rem;
       }
-      .points{
+      .points {
         background-color: #28a745;
         color: #fff;
         text-align: center;
@@ -30,7 +30,21 @@ html
         border-radius: 60px;
         text-decoration: none;
         font-weight: bold;
-        font-size:2rem
+        font-size: 2rem;
+      }
+      .delete-btn {
+        background-color: red; /* Red background */
+        color: white; /* White text */
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      .delete-btn:hover {
+        background-color: darkred; /* Darker red on hover */
       }
   body
     .container.mt-4
@@ -42,6 +56,9 @@ html
         textarea(name='new_points' rows=6 cols=50)
         div 
           input(type='submit' value='Submit')
+      // Red Delete button
+      form(action='/delete-user/'+userid, method='POST')
+        button(type='submit', class='delete-btn') Delete User
 
     // Show success or failure popup
     if successMessage
