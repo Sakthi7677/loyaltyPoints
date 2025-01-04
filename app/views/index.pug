@@ -78,39 +78,6 @@ html
         background-color: #1f1d1c;
       }
 
-      /* Sign Up Link */
-      .signup-link {
-        display: block;
-        margin-top: 20px;
-        color: #1f1d1c;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: bold;
-      }
-
-      .signup-link:hover {
-        text-decoration: underline;
-      }
-
-      /* Position the About Us link at the bottom right */
-      .about-us-link {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #1f1d1c;
-        text-decoration: none;
-        background-color: #fff;
-        padding: 8px 16px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .about-us-link:hover {
-        text-decoration: underline;
-      }
-
       /* Responsive design */
       @media (max-width: 480px) {
         .form-container {
@@ -134,10 +101,10 @@ html
   body
     .form-container
       h1 Loyalty Points
-      form(action='/authenticate' method='POST')
+      form(action='/points/:username', method='POST')
         div
-          label(for='email') Email Id:
-          input(type='text', id='email', name='email', required)
+          label(for='username') Username:
+          input(type='text', id='username', name='username', required)
 
         div
           label(for='password') Password:
@@ -145,8 +112,3 @@ html
 
         div
           button(type='submit') Login
-
-      a.signup-link(href='/register') Create an Account
-
-    // About Us link positioned at the bottom-right
-    a.about-us-link(href='/aboutUs') About Us
