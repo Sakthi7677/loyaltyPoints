@@ -21,7 +21,7 @@ html
         margin-bottom: 20px;
         margin-left: 28rem;
         font-size: 5rem;
-        font-weight: bold;
+        font-weight :bold
       }
       .list-group-item {
         font-size: 3rem;
@@ -30,12 +30,16 @@ html
         margin: 5px 0;
         border-radius: 4px;
         transition: background-color 0.3s;
-        font-weight: bold;
+        font-weight :bold;
+        
       }
       .list-group {
         margin-left: 29rem;
         margin-top: 5rem;
       }
+      //- .list-group-item:hover {
+      //-   background-color: #d1d6ddb3;
+      //- }
       .btn {
         background-color: #121312;
         color: #fff;
@@ -45,31 +49,10 @@ html
         text-decoration: none;
         font-weight: bold;
       }
-      /* Logout button styles */
-      .logout-btn {
-        position: fixed; /* Fix the button to the top right */
-        top: 20px;
-        right: 20px;
-        background-color: #dc3545; /* Red background */
-        color: white;
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        cursor: pointer;
-        border: none;
-      }
-      .logout-btn:hover {
-        background-color: #c82333; /* Darker red on hover */
-      }
   body
     .container.mt-4
       h1.text-center Our Customers
       ul.list-group
         each user in users
           li.list-group-item
-            a.btn(href="/retailer-view/"+ `${user.id}`, name=user.name) #{user.name}
-    
-    //- Logout button form
-    form(action='/logout', method='POST')
-      button(type='submit', class='logout-btn') Logout
+            a.btn(href="/aboutUs", name=user.name) #{user.name}
