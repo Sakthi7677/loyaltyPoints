@@ -20,11 +20,6 @@ app.use(session({
   cookie: { secure: false }
 }));
 
-// Create a route for root - /
-// app.get("/", function(req, res) {
-//    res.render("index");
-// });
-
 app.get("/", function(req, res) {
     res.redirect('/login')
 });
@@ -63,7 +58,7 @@ app.get("/aboutUs", function(req, res) {
 //   });
 app.get('/points/retailer', function (req, res) {
     
-    var sql = "select * from loyaltypoints where role = 'customer'";
+    var sql = "select * from loyaltypoints where role = 'customer' and is_active = True";
     db.query(sql).then(results => {
         console.log(results)
         return res.render('userList',{users:results}); 
@@ -173,8 +168,6 @@ app.post('/authenticate', async function (req, res) {
                 console.log(req.session.id);
                 var sql = "SELECT role FROM loyaltypoints WHERE id = ?";
                 const result = await db.query(sql, [uId]); 
-                console.log('&&&')
-                console.log(result)
                 if (result[0].role === 'customer') {
                     res.redirect('/points/' + uId);
                 }
@@ -182,10 +175,8 @@ app.post('/authenticate', async function (req, res) {
                     res.redirect('/points/retailer');
                 }
                 
-                // res.redirect('/single-student/' + uId);
             }
             else {
-                // TODO improve the user journey here
                 res.send('invalid password');
             }
         }
@@ -202,8 +193,8 @@ app.post('/delete-user/:userid', async function (req, res) {
     console.log('Deleting user with ID:', userId);
 
     try {
-        // Delete the user from the loyaltypoints table
-        var sql = 'DELETE FROM loyaltypoints WHERE id = ?';
+        // set the customer as in-active rather than deleting it from the database
+        var sql = ' UPDATE loyaltypoints SET is_active = False WHERE id = ?';
         const result = await db.query(sql, [userId]);
         
         if (result.affectedRows > 0) {

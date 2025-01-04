@@ -4,10 +4,7 @@ const bcrypt = require("bcryptjs");
 
 class User {
 
-    // Id of the user
     id;
-
-    // Email of the user
     email;
 
     constructor(email) {
@@ -18,7 +15,6 @@ class User {
     async getIdFromEmail()  {
         var sql = "SELECT id FROM loyaltypoints WHERE email = ?";
         const result = await db.query(sql, [this.email]);
-        // TODO LOTS OF ERROR CHECKS HERE..
         if (JSON.stringify(result) != '[]') {
             this.id = result[0].id;
             return this.id;
@@ -41,18 +37,9 @@ class User {
     // Add a new record to the users table    
     async addUser(name, email,password) {
         const pw = await bcrypt.hash(password, 10);
-        console.log('-----------')
-        console.log(name)
-        console.log(email)
-        console.log(password)
-        console.log(pw)
         var sql = "INSERT INTO loyaltypoints (name, points, role, email, password) VALUES (?, 0, ?, ? , ?)";
-        console.log(sql)
-        console.log('*****')
-        console.log(this.email)
-       //INSERT INTO `loyaltypoints` (`id`, `name`, `points`, `role`, `email`, `password`) VALUES (NULL, NULL, NULL, '', '', '')
-       const result = await db.query(sql, [name, 'customer', email, pw]);
-       console.log(result.insertId);
+        const result = await db.query(sql, [name, 'customer', email, pw]);
+        console.log(result.insertId);
         this.id = result.insertId;
         return true;
     }
