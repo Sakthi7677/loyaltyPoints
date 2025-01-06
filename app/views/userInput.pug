@@ -120,6 +120,24 @@ html
       .logout-btn:hover {
         background-color: #c82333; /* Darker red on hover */
       }
+      .delete-btn {
+        position: fixed; /* Fix the button to the bottom right */
+        bottom: 20px; /* Position 20px from the bottom */
+        right: 20px; /* Position 20px from the right */
+        background-color: red; /* Red background */
+        color: white; /* White text */
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        z-index: 10; /* Ensures the button is above other content */
+      }
+
+      .delete-btn:hover {
+        background-color: darkred; /* Darker red on hover */
+      }
 
   body
     .container.mt-4
@@ -143,6 +161,10 @@ html
     else if errorMessage
       script.
         alert("#{errorMessage}")
+
+      //- button to delete customer logically 
+    form(action='/delete-user/'+userid, method='POST')
+      button(type='submit', class='delete-btn') Delete User  
 
         //- Logout button form
     form(action='/logout', method='POST')
