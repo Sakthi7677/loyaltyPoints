@@ -130,10 +130,10 @@ html
   body
     .form-container
       h1 Loyalty Points
-      form(action='/points/:username', method='POST')
+      form(action='/authenticate' method='POST')
         div
-          label(for='username') Username:
-          input(type='text', id='username', name='username', required)
+          label(for='email') Email Id
+          input(type='text', id='email', name='email', required)
 
         div
           label(for='password') Password:

@@ -37,25 +37,7 @@ app.get('/login', function (req, res) {
 app.get("/aboutUs", function(req, res) {
     res.render("aboutUs");
  });
-// app.get('/points/:username', (req, res) => {
-//     var user = req.params.id;
-//     sql = 'select * from loyaltypoints where username = ?';
-//     db.query(sql).then(results => {
-//         console.log(results)
-//             results.filter((user)=>{
-//              if (user.name===res.req.query.username && user.isRetail==="NO"){
-//                 return res.render('card', { points:user.points,cusName:user.name});
-//              }
-//              else if(user.name===res.req.query.username && user.isRetail==="YES"){
-//                 return res.render('userList',{users:results});
-//              }
-             
-//         })
 
-       
-//     });
-        
-//   });
 app.get('/points/retailer', function (req, res) {
     
     var sql = "select * from loyaltypoints where role = 'customer' and is_active = True";
