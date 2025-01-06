@@ -68,6 +68,24 @@ html
         font-weight: bold;
         font-size :1.5rem
       }
+       /* Logout button styling */
+      .logout-btn {
+        position: fixed; /* Fixed to the top right */
+        top: 20px;
+        right: 20px;
+        background-color: #dc3545; /* Red background */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+      }
+
+      .logout-btn:hover {
+        background-color: #c82333; /* Darker red on hover */
+      }
   body
     .container
       h1.header Hi, #{cusName}
@@ -78,3 +96,6 @@ html
       p 2. Exclusive discounts on select items – up to 30% off!
       p 3. Refer a friend and get 100 bonus points for each successful referral.
       p 4. Sign up for our newsletter and receive a 10% off coupon for your next order.
+
+    form(action='/logout', method='POST')
+      button(type='submit', class='logout-btn') Logout    
