@@ -38,7 +38,7 @@ html
       }
 
       p.points {
-        background-color: #ab7651;
+        background-color: #dc3545;
         color: #fff;
         padding: 20px;
         border-radius: 10px;
@@ -69,7 +69,7 @@ html
       }
 
       input[type="submit"] {
-        background-color: #ab7651;
+        background-color: #dc3545;
         color: #fff;
         border: none;
         padding: 12px 20px;
@@ -82,7 +82,7 @@ html
       }
 
       input[type="submit"]:hover {
-        background-color: #ab7651;
+        background-color: #dc3545;
       }
 
       /* Responsive Design */
@@ -103,6 +103,22 @@ html
         input[type="submit"] {
           font-size: 1rem;
         }
+      }
+      .logout-btn {
+        position: fixed; /* Fix the button to the top right */
+        top: 20px;
+        right: 20px;
+        background-color: #dc3545; /* Red background */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+      }
+      .logout-btn:hover {
+        background-color: #c82333; /* Darker red on hover */
       }
 
   body
@@ -127,3 +143,7 @@ html
     else if errorMessage
       script.
         alert("#{errorMessage}")
+
+        //- Logout button form
+    form(action='/logout', method='POST')
+      button(type='submit', class='logout-btn') Logout
